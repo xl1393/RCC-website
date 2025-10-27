@@ -126,9 +126,9 @@ This template uses Starwind UI’s theming patterns with Tailwind v4:
 
 Dark mode is enabled by applying `.dark` or `[data-theme="dark"]` on a root element. The home page defaults to dark. To customize:
 
-1) Edit tokens in `styles/tokens.css` (light theme base).
-2) Refine dark theme overrides in `styles/themes/dark.css` (e.g., `--background`, `--card`, shadows, semantic colors).
-3) Prefer adjusting `.card-surface` and utilities in `styles/utilities.css` instead of component‑scoped styles.
+1. Edit tokens in `styles/tokens.css` (light theme base).
+2. Refine dark theme overrides in `styles/themes/dark.css` (e.g., `--background`, `--card`, shadows, semantic colors).
+3. Prefer adjusting `.card-surface` and utilities in `styles/utilities.css` instead of component‑scoped styles.
 
 Accessibility: If Lighthouse flags contrast, slightly increase background luminance and/or raise text contrast by tweaking tokens in `dark.css` (e.g., `--background`, `--card`, and text color variables).
 
@@ -227,6 +227,7 @@ author: Site Author # optional; defaults to site author
 ```
 
 Notes:
+
 - Author pages use a slugified version of the author name (e.g., `site-author`).
 - Tag pages use slugified tag names (e.g., `astro`).
 - Category pages use slugified category names (e.g., `growth`).
@@ -278,11 +279,11 @@ Tip: Feed readers can auto‑discover tag/category feeds via the `<link rel="alt
 
 Deploy to GitHub Pages with one workflow.
 
-1) Configure site and base in `astro.config.mjs` (critical)
+1. Configure site and base in `astro.config.mjs` (critical)
 
 ```js
 // astro.config.mjs
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
   // User/Org Pages (https://<user>.github.io):
@@ -291,15 +292,16 @@ export default defineConfig({
   // Project Pages (https://<user>.github.io/<repo>/):
   //   site: 'https://<user>.github.io/<repo>/',
   //   base: '/<repo>/'
-  site: 'https://your-user.github.io',
-  base: '/',
+  site: "https://your-user.github.io",
+  base: "/",
 });
 ```
 
-2) Enable GitHub Pages in your repo
+2. Enable GitHub Pages in your repo
+
 - Settings → Pages → Build and deployment → Source: GitHub Actions
 
-3) Add the workflow (ready to copy)
+3. Add the workflow (ready to copy)
 
 Create `.github/workflows/deploy.yml` with:
 
@@ -308,7 +310,7 @@ name: Deploy Astro to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -331,7 +333,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: "npm"
 
       - name: Install deps
         run: npm ci
@@ -356,36 +358,40 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-4) Commit and push to `main`
+4. Commit and push to `main`
+
 - First run may take a minute. Check Actions tab for logs and the Pages URL.
 
 Troubleshooting
+
 - CSS/assets 404 on project pages → `base` is missing or wrong. Set `base: '/<repo>/'` and rebuild.
 - Wrong canonical URLs/RSS → `site` incorrect. Use your real Pages URL (or your custom domain if you set one).
 - Custom domain (CNAME) → Set `site: 'https://example.com'` and keep `base: '/'`.
 
 ## ⚙️ Configuration (do this first)
 
-1) Set your canonical site URL in `astro.config.mjs`:
+1. Set your canonical site URL in `astro.config.mjs`:
+
 ```js
 // astro.config.mjs
 export default defineConfig({
-  site: 'https://your-domain.com',
+  site: "https://your-domain.com",
   // ...
-})
+});
 ```
 
-2) Update global meta in `src/consts.ts`:
+2. Update global meta in `src/consts.ts`:
+
 ```ts
-export const SITE_TITLE = 'Your Site Title';
-export const SITE_DESCRIPTION = 'Short description for social/meta.';
+export const SITE_TITLE = "Your Site Title";
+export const SITE_DESCRIPTION = "Short description for social/meta.";
 ```
 
-3) Author profile in `src/data/author.ts` (name, avatar, social URLs).
+3. Author profile in `src/data/author.ts` (name, avatar, social URLs).
 
-4) Replace favicon/app icons in `public/` (keep file names the same).
+4. Replace favicon/app icons in `public/` (keep file names the same).
 
-5) Optional: Customize theme tokens in `src/styles/tokens.css` and dark overrides in `src/styles/themes/dark.css`.
+5. Optional: Customize theme tokens in `src/styles/tokens.css` and dark overrides in `src/styles/themes/dark.css`.
 
 ## 🧪 Optional: Analytics
 
@@ -399,6 +405,7 @@ This template ships without analytics by default. To add GA4 later, place the GA
 ## 🧰 Netlify (example)
 
 If you deploy to Netlify, use:
+
 ```toml
 # netlify.toml
 [build]
@@ -425,5 +432,4 @@ If you deploy to Netlify, use:
 
 MIT — you’re free to use, modify, and redistribute. See `LICENSE` for details.
 
-Check my site live at 'https://guihubie.com'
-
+Check my site live at 'https://example.com'

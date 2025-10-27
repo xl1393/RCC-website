@@ -1,10 +1,10 @@
 /* Dark theme tokens. Applied when an ancestor sets [data-theme="dark"] or .dark */
 [data-theme="dark"],
 .dark {
-  /* Primary Brand Colors (Flowing Orange) */
-  --accent: #FF8A4C;
-  --accent-dark: #F97316;
-  --accent-rgb: 255, 138, 76;
+  /* Primary Brand Colors (Brand Blue) */
+  --accent: #1e386a;
+  --accent-dark: #1e386a;
+  --accent-rgb: 30, 56, 106;
 
   /* Neutral Colors */
   --black: 255, 255, 255;
@@ -23,7 +23,7 @@
   --color-border: rgba(var(--gray-light), 0.3);
   --color-border-light: rgba(var(--gray-light), 0.1);
   --color-accent-text: var(--accent);
-  --color-accent-bg: rgba(var(--accent), 0.15);
+  --color-accent-bg: rgba(var(--accent-rgb), 0.15);
 
   /* Translucent surfaces */
   --surface-100: rgba(255, 255, 255, 0.05);
@@ -51,8 +51,8 @@
   --card-foreground: rgb(243, 244, 246);
   --popover: #282c34;
   --popover-foreground: rgb(243, 244, 246);
-  --primary: #FF8A4C;
-  --primary-foreground: #0f1219;
+  --primary: #1e386a;
+  --primary-foreground: #ffffff;
   --secondary: #FFB36B;
   --secondary-foreground: rgb(243, 244, 246);
   --muted: rgba(255, 255, 255, 0.06);
@@ -70,7 +70,7 @@
   /* Slightly softer borders on translucent surfaces */
   --border: var(--surface-300);
   --input: var(--surface-300);
-  --outline: #F97316;
+  --outline: var(--accent);
 }
 
 

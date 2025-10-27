@@ -6,10 +6,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import HeroSection from '../components/sections/HeroSection.astro';
 import SkillsSection from '../components/sections/SkillsSection.astro';
 import { skills } from '../data/skills';
-import WorkExperience from '../components/sections/WorkExperience.astro';
-import { work } from '../data/work';
-import Studies from '../components/sections/Studies.astro';
-import { studies } from '../data/studies';
+// Studies section removed from landing page
 import Carousel from '../components/ui/carousel/Carousel.astro';
 import { logos } from '../data/logos';
 import ArrowSeparator from '../components/ui/separator/ArrowSeparator.astro'
@@ -23,8 +20,13 @@ import notionLogo from '../assets/logos/Notion-logo.svg';
 import figmaLogo from '../assets/logos/Figma-logo.svg';
 
 // skills are imported from src/data/skills
----
 
+// const password = "1234";
+// const query = Astro.url.searchParams.get("pw");
+// if (query !== password) {
+//  throw new Error("Unauthorized");
+//}
+---
 <!doctype html>
 <html lang="en" data-theme="dark" class="dark">
 	<head>
@@ -35,10 +37,10 @@ import figmaLogo from '../assets/logos/Figma-logo.svg';
       '@type': 'Organization',
       name: 'Site Author',
       url: new URL('/', Astro.site).toString(),
-      logo: new URL('/favicon.svg', Astro.site).toString(),
+  logo: new URL('/cuny-seeklogo.svg', Astro.site).toString(),
       sameAs: [
-        'https://x.com/guihubie',
-        'https://www.linkedin.com/in/guilherme-hubie/',
+        '/__broken/x',
+        '/__broken/linkedin',
       ],
     })} />
 	</head>
@@ -46,8 +48,8 @@ import figmaLogo from '../assets/logos/Figma-logo.svg';
 		<Header />
 		<main>
       <HeroSection
-        title="Your Headline Goes Here!"
-        subtitle="I build softwares that brings you loyal subscribers."
+        title="Our Headline Goes Here!"
+        subtitle="Some description about RCC, RCMI, CUNY Med, etc"
         showCTA
         primaryCTA={{ text: 'View Projects', href: '/portfolio' }}
         secondaryCTA={{ text: 'Read Blog', href: '/blog' }}
@@ -56,12 +58,9 @@ import figmaLogo from '../assets/logos/Figma-logo.svg';
 
     <section class="py-6">
       <ArrowSeparator />
-      <SkillsSection title="Skills & Tools" skills={skills} />   
-      <ArrowSeparator />
-      <WorkExperience title="Work Experience" items={work} />
-      <ArrowSeparator />
-      <Studies title="Studies" items={studies} />
-      <GlowLineSeparator />
+  <SkillsSection title="Skills & Services" skills={skills} />
+  <ArrowSeparator />
+  <GlowLineSeparator />
     </section>
 		</main>
 		<Footer />
