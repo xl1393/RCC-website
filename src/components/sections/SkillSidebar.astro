@@ -1,0 +1,15 @@
+---
+import { skills } from '../../data/skills';
+---
+<aside class="w-80 p-6 bg-[color:var(--color-surface)] rounded-xl shadow-md sticky top-8">
+  <h2 class="text-2xl font-extrabold mb-6 text-foreground">Services</h2>
+  <ul class="space-y-3">
+    {skills.map(skill => (
+      <li>
+        <a href={`/skills/${skill.slug}`} class="block px-3 py-2 rounded hover:bg-[color:var(--accent)] hover:text-white transition-colors text-lg font-semibold no-underline text-foreground">
+          {skill.title}
+        </a>
+      </li>
+    ))}
+  </ul>
+</aside>

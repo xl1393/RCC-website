@@ -4,9 +4,7 @@ import Footer from '../components/sections/Footer.astro';
 import Header from '../components/sections/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import HeroSection from '../components/sections/HeroSection.astro';
-import SkillsSection from '../components/sections/SkillsSection.astro';
-import { skills } from '../data/skills';
-// Studies section removed from landing page
+import SkillSidebar from '../components/sections/SkillSidebar.astro';
 import Carousel from '../components/ui/carousel/Carousel.astro';
 import { logos } from '../data/logos';
 import ArrowSeparator from '../components/ui/separator/ArrowSeparator.astro'
@@ -47,21 +45,18 @@ import figmaLogo from '../assets/logos/Figma-logo.svg';
 	<body>
 		<Header />
 		<main>
-      <HeroSection
-        title="Our Headline Goes Here!"
-        subtitle="Some description about RCC, RCMI, CUNY Med, etc"
-        showCTA
-        primaryCTA={{ text: 'View Projects', href: '/portfolio' }}
-        secondaryCTA={{ text: 'Read Blog', href: '/blog' }}
-      />
-     
-
-    <section class="py-6">
-      <ArrowSeparator />
-  <SkillsSection title="Skills & Services" skills={skills} />
-  <ArrowSeparator />
-  <GlowLineSeparator />
-    </section>
+      <div class="flex gap-8 max-w-7xl mx-auto">
+        <SkillSidebar />
+        <div class="flex-1">
+          <HeroSection
+            title="Welcome to NYC-MEHSJ Research Capacity Core (RCC) at CUNY!"
+            subtitle={`The NYC-MEHSJ Research Capacity Core (RCC) at City College of New York enhances research on health disparities by supporting faculty with advanced resources in research technology, analytics, artificial intelligence, and bioinformatics. The RCC offers technical training, expert consultations, and collaborative opportunities to boost research rigor and innovation. Bioinformatics & AI is a core focus, providing expertise in experimental design and data analysis to handle complex health data and support impactful, community-engaged research at CCNY.\n\nThe RCC provides support for researchers from any CUNY program at any stage of research:\n• Master's students\n• Doctoral students\n• Post-docs\n• Faculty\n\nSupport is provided in four main areas:\n• Project and research planning\n• Data analysis\n• Computational programming\n• Writing and publication support`}
+            showCTA
+            primaryCTA={{ text: 'View Projects', href: '/portfolio', size: 'xl' }}
+            secondaryCTA={{ text: 'Read Blog', href: '/blog', size: 'xl' }}
+          />
+        </div>
+      </div>
 		</main>
 		<Footer />
 	</body>
