@@ -1,0 +1,41 @@
+---
+
+import Header from '../../components/sections/Header.astro';
+import Footer from '../../components/sections/Footer.astro';
+import { skills } from '../../data/skills';
+import type { Skill } from '../../data/skills';
+import BaseHead from '../../components/BaseHead.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+
+export const getStaticPaths = () => skills.map((skill) => ({ params: { slug: skill.slug } }));
+
+const { slug } = Astro.params;
+const skill: Skill | undefined = skills.find((s) => s.slug === slug);
+if (!skill) {
+  throw new Error(`Skill not found: ${slug}`);
+}
+---
+
+
+
+<!doctype html>
+<html lang="en" data-theme="dark" class="dark">
+  <head>
+    <BaseHead title={`${skill.title} | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="w-full py-12">
+        <div class="mx-auto max-w-3xl px-4">
+          <div class="mb-6 flex flex-col items-center">
+            <div class="mb-4 rounded-xl size-[64px] flex items-center justify-center text-[var(--accent)] opacity-90 transition-all duration-300 will-change-transform [&>svg]:w-10 [&>svg]:h-10" style="background: rgba(var(--accent-rgb),0.08);" set:html={skill.icon} />
+            <h1 class="text-3xl md:text-4xl font-bold text-center mb-2 text-foreground">{skill.title}</h1>
+          </div>
+          <p class="text-lg text-[color:var(--color-text-muted)] leading-relaxed text-center">{skill.description}</p>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
