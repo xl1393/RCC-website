@@ -32,7 +32,69 @@ if (!skill) {
             <div class="mb-4 rounded-xl size-[64px] flex items-center justify-center text-[var(--accent)] opacity-90 transition-all duration-300 will-change-transform [&>svg]:w-10 [&>svg]:h-10" style="background: rgba(var(--accent-rgb),0.08);" set:html={skill.icon} />
             <h1 class="text-3xl md:text-4xl font-bold text-center mb-2 text-foreground">{skill.title}</h1>
           </div>
-          <p class="text-lg text-[color:var(--color-text-muted)] leading-relaxed text-center">{skill.description}</p>
+          {skill.slug === 'research-technology-marketplace' ? (
+            <div class="text-lg text-[color:var(--color-text-muted)] leading-relaxed text-left space-y-4">
+              <p>
+                <span aria-label="shopping cart" role="img">🛒</span><strong>Research Technology Marketplace</strong> <br/>
+                The Research Technology Marketplace is your gateway to the latest research technologies, computational tools, and shared resources across the CUNY system. Our goal is to empower researchers at every level—students, postdocs, and faculty—to accelerate discovery and innovation by providing easy access to advanced equipment and expertise.
+              </p>
+              <p>
+                Whether you are launching a new project, scaling up your experiments, or seeking specialized instrumentation, the Marketplace connects you to a robust network of resources. We facilitate collaboration and resource sharing, helping you maximize the impact of your research while minimizing barriers to access.
+              </p>
+              <ul class="list-none space-y-2">
+                <li><span aria-label="computer" role="img">🖥️</span> <strong>Available Major Equipment:</strong> Gain access to high-performance computing clusters for data-intensive research, next-generation sequencing machines for genomics, and a wide array of specialized research equipment to support your scientific goals.</li>
+                <li><span aria-label="office building" role="img">🏢</span> <strong>Accessible Core Facilities:</strong> Take advantage of shared core facilities, including imaging centers, analytical labs, and fabrication spaces, all available to CUNY researchers through a streamlined booking process.</li>
+                <li><span aria-label="arrows" role="img">🔄</span> <strong>Equipment Exchange:</strong> Our platform enables the sharing and exchange of research equipment across CUNY institutions, reducing duplication and ensuring that valuable resources are fully utilized. List your available equipment or find what you need for your next project.</li>
+              </ul>
+            </div>
+          ) : skill.slug === 'the-principles-and-practice-workshops' ? (
+            <div class="text-lg text-[color:var(--color-text-muted)] leading-relaxed text-left space-y-4">
+              <p>
+                <span aria-label="graduation cap" role="img">🎓</span> <strong>The Principles and Practice Workshops</strong><br/>
+                Our Principles and Practice Workshops deliver immersive, hands-on training designed to empower researchers, students, and professionals in the fields of bioinformatics and artificial intelligence. Each session is crafted to bridge the gap between foundational theory and real-world application, ensuring participants gain both conceptual understanding and practical skills.
+              </p>
+              <ul class="list-none space-y-2">
+                <li><span aria-label="clipboard" role="img">📋</span> <strong>Research Strategy and Experimental Design:</strong> Receive expert guidance on designing robust research studies and experimental protocols. Learn how to formulate research questions, select appropriate methodologies, and ensure reproducibility in your work.</li>
+                <li><span aria-label="bar chart" role="img">📊</span> <strong>Bioinformatics and Analytics Support:</strong> Get comprehensive support for data analysis, statistical modeling, and computational methods. Our workshops cover essential tools and workflows for managing, analyzing, and visualizing complex biological data.</li>
+                <li><span aria-label="robot" role="img">🤖</span> <strong>Artificial Intelligence for Research and Health:</strong> Explore the latest AI and machine learning applications in biomedical research and healthcare. Gain hands-on experience with algorithms, data pipelines, and real-world case studies that demonstrate the transformative power of AI in science and medicine.</li>
+              </ul>
+              <p>
+                <span aria-label="sparkles" role="img">✨</span> <strong>Why Choose Our Workshops?</strong><br/>
+                - Interactive, small-group sessions led by experienced instructors<br/>
+                - Real-world datasets and practical exercises<br/>
+                - Focus on both principles and hands-on practice<br/>
+                - Support for all experience levels, from beginner to advanced
+              </p>
+              <p>
+                Join us to build your expertise, expand your research toolkit, and connect with a vibrant community of learners and innovators.
+              </p>
+            </div>
+          ) : skill.slug === 'research-strategy-and-experimental-design' ? (
+            <div class="text-lg text-[color:var(--color-text-muted)] leading-relaxed text-left space-y-4">
+              <p>
+                <span aria-label="clipboard" role="img">📋</span> <strong>Research Strategy and Experimental Design</strong><br/>
+                Our Research Strategy and Experimental Design service provides expert guidance to help you plan, structure, and execute robust research projects. We work with you from the earliest stages—formulating research questions and hypotheses—through to the design of experiments and protocols that maximize rigor, reproducibility, and impact.
+              </p>
+              <ul class="list-none space-y-2">
+                <li><span aria-label="bulb" role="img">💡</span> <strong>Strategic Planning:</strong> Collaborate with experienced researchers to develop clear, actionable research strategies tailored to your scientific goals and resources.</li>
+                <li><span aria-label="microscope" role="img">🔬</span> <strong>Experimental Design:</strong> Receive support in designing experiments that are statistically sound, ethically responsible, and optimized for meaningful results. Learn best practices for controls, randomization, and blinding.</li>
+                <li><span aria-label="bar chart" role="img">📊</span> <strong>Data Collection & Analysis:</strong> Get advice on selecting appropriate data collection methods, sample sizes, and analytical approaches to ensure your findings are robust and reproducible.</li>
+                <li><span aria-label="repeat" role="img">🔁</span> <strong>Reproducibility & Reporting:</strong> Implement protocols and documentation standards that support transparency and reproducibility, making your research more credible and impactful.</li>
+              </ul>
+              <p>
+                <span aria-label="sparkles" role="img">✨</span> <strong>Why Work With Us?</strong><br/>
+                - Personalized, one-on-one consultations with research experts<br/>
+                - Guidance on grant writing and project management<br/>
+                - Support for interdisciplinary and collaborative projects<br/>
+                - Emphasis on ethical, transparent, and impactful science
+              </p>
+              <p>
+                Let us help you turn your research ideas into successful, well-designed studies that stand up to peer review and drive scientific progress.
+              </p>
+            </div>
+          ) : (
+            <p class="text-lg text-[color:var(--color-text-muted)] leading-relaxed text-center">{skill.description}</p>
+          )}
         </div>
       </section>
     </main>
