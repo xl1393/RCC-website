@@ -5,9 +5,9 @@ interface Props {
 }
 const { title, url } = Astro.props as Props;
 const hnUrl = `https://news.ycombinator.com/submitlink?u=${encodeURIComponent(url)}&t=${encodeURIComponent(title)}`;
-const liUrl = `/__broken/share/linkedin?url=${encodeURIComponent(url)}`;
+const liUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
 const rdUrl = `https://www.reddit.com/submit?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`;
-const xUrl = `/__broken/share/x?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
 
 import xIcon from '../../../assets/icons/x-blog-post-share-icon.svg?raw';
 import hnIcon from '../../../assets/icons/icons8-y-combinator.svg?raw';
