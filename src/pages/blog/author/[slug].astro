@@ -20,7 +20,7 @@ const { slug } = Astro.params;
 const posts = (await getCollection('blog')).filter((p) => slugify(p.data.author || 'RCC') === slug);
 const authorName = posts[0]?.data.author || 'RCC';
 ---
-<html lang="en" data-theme="dark" class="dark">
+<html lang="en" data-theme="light">
   <head>
     <BaseHead title={`Articles by ${authorName}`} description={`Posts written by ${authorName}`} />
   </head>
