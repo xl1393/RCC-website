@@ -1,0 +1,72 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/sections/Footer.astro';
+import Header from '../components/sections/Header.astro';
+import { SITE_TITLE } from '../consts';
+
+const pageTitle = 'Team';
+const pageDescription = 'Meet the team at the NYC-MEHSJ Research Capacity Core';
+
+const teamMembers = [
+  {
+    name: 'Dr. Ashiwel Undieh',
+    role: 'Director',
+  },
+  {
+    name: 'Dr. Jie Wei',
+    role: 'Co-Director',
+  },
+  {
+    name: 'Dr. Truong Nguyen',
+    role: 'Bioinformatics',
+  },
+  {
+    name: 'Xu Li',
+    role: 'AI Research Associate',
+  },
+];
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <BaseHead title={`${pageTitle} | ${SITE_TITLE}`} description={pageDescription} />
+  </head>
+  <body>
+    <Header />
+    <main class="max-w-6xl mx-auto px-4 py-12 md:py-20">
+      <!-- Page Header -->
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold text-foreground mb-4">
+          Our Team
+        </h1>
+        <p class="text-lg text-[color:var(--color-text-secondary)] max-w-3xl mx-auto">
+          Meet the dedicated researchers and professionals at the NYC-MEHSJ Research Capacity Core
+        </p>
+      </div>
+
+      <!-- Team Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {teamMembers.map(member => (
+          <div class="card-surface p-4 rounded-lg text-center hover:shadow-lg transition-shadow">
+            <!-- Placeholder Avatar -->
+            <div class="w-24 h-24 mx-auto mb-3 rounded-full bg-[color:var(--color-bg-secondary)] flex items-center justify-center border-2 border-[color:var(--accent)] overflow-hidden">
+              <svg class="w-14 h-14 text-[color:var(--color-text-muted)]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+            </div>
+
+            <!-- Name and Role -->
+            <h3 class="text-base font-bold text-foreground mb-1">
+              {member.name}
+            </h3>
+            <p class="text-sm text-[color:var(--accent)] font-semibold">
+              {member.role}
+            </p>
+          </div>
+        ))}
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>
