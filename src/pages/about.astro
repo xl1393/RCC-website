@@ -1,15 +1,15 @@
 ---
 import Layout from '../layouts/BlogPost.astro';
 import GlowLineSeparator from '@/components/ui/separator/GlowLineSeparator.astro';
-const pageTitle = 'About Us';
-const pageDescription = 'Learn more about our background and approach to building software.';
+import { getEntry, render } from 'astro:content';
+
+const aboutPage = await getEntry('pages', 'about');
+const { Content } = await render(aboutPage);
+const { title, description } = aboutPage.data;
 ---
 
-<Layout title={pageTitle} description={pageDescription} pubDate={new Date()} showHeader={false}>
-  <p>
-Led by Ashiwel Undieh, PhD, Core Director, and Associate Directors, Jie Wei, PhD; Mark Hauber, PhD; Mitchell Schaffler, PhD; and Nancy Sohler, PhD, this Core is designed to enhance researchers’ capabilities to conduct high-quality biomedical, behavioral, and clinical research to reduce health disparities in underserved communities in New York City, which reflects NYC’s economic disparity. This initiative supports clinical studies, recruits talented research-design counselors and data-savvy staff, trains researchers in advanced techniques, and adapts AI technologies for clinical, behavioral, and community research.
-  </p>
-
+<Layout title={title} description={description} pubDate={new Date()} showHeader={false}>
+  <Content />
 
   <GlowLineSeparator />
 
