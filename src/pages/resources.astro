@@ -51,9 +51,11 @@ const { title: pageTitle, description: pageDescription, subtitle, sectionTitle, 
           </div>
         </div>
 
-        <!-- Specifications Card - Content from CMS -->
-        <div class="card-surface p-8 rounded-xl max-w-4xl mx-auto prose prose-lg max-w-none">
-          <Content />
+        <!-- Specifications Card -->
+        <div class="card-surface p-8 rounded-xl max-w-4xl mx-auto">
+          <div class="prose prose-lg max-w-none [&>h2]:text-2xl [&>h2]:font-semibold [&>h2]:text-foreground [&>h2]:mb-6 [&>h2]:text-center [&>h3]:text-sm [&>h3]:font-semibold [&>h3]:text-[color:var(--accent)] [&>h3]:uppercase [&>h3]:mb-1 [&>h3]:mt-4 [&>p]:text-[color:var(--color-text-primary)] [&>ul]:text-sm [&>ul]:text-[color:var(--color-text-muted)] [&>ul]:list-disc [&>ul]:list-inside [&>ul]:mt-1">
+            <Content />
+          </div>
         </div>
       </div>
     </main>
