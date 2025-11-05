@@ -3,9 +3,12 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/sections/Footer.astro';
 import Header from '../components/sections/Header.astro';
 import { SITE_TITLE } from '../consts';
+import { getEntry, render } from 'astro:content';
 
-const pageTitle = 'Resources';
-const pageDescription = 'High-performance computing resources available at the NYC-MEHSJ Research Capacity Core';
+// Get resources page content from CMS
+const resourcesPage = await getEntry('pages', 'resources');
+const { Content } = await render(resourcesPage);
+const { title: pageTitle, description: pageDescription, subtitle, sectionTitle, sectionDescription } = resourcesPage.data;
 ---
 
 <!doctype html>
@@ -19,10 +22,10 @@ const pageDescription = 'High-performance computing resources available at the N
       <!-- Page Header -->
       <div class="text-center mb-16">
         <h1 class="text-4xl md:text-5xl font-bold text-foreground mb-4">
-          Computing Resources
+          {pageTitle}
         </h1>
         <p class="text-lg text-[color:var(--color-text-secondary)] max-w-3xl mx-auto">
-          High-performance computing infrastructure for advanced research in bioinformatics, AI, and data science
+          {pageDescription}
         </p>
       </div>
 
@@ -42,84 +45,15 @@ const pageDescription = 'High-performance computing resources available at the N
           <!-- Description -->
           <div class="text-center md:text-left">
             <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Lambda Workstations
+              {sectionTitle}
             </h2>
-            <p class="text-lg text-[color:var(--color-text-secondary)] leading-relaxed">
-              We provide access to <strong class="text-[color:var(--accent)]">2 high-performance Lambda workstations</strong> equipped with cutting-edge hardware for demanding computational tasks in bioinformatics, AI, and data science.
-            </p>
+            <p class="text-lg text-[color:var(--color-text-secondary)] leading-relaxed" set:html={sectionDescription} />
           </div>
         </div>
 
-        <!-- Specifications Card -->
-        <div class="card-surface p-8 rounded-xl max-w-4xl mx-auto">
-          <h3 class="text-2xl font-semibold text-foreground mb-6 text-center">
-            Technical Specifications
-          </h3>
-
-          <div class="grid md:grid-cols-2 gap-6">
-            <!-- Left Column -->
-            <div class="space-y-4">
-              <div>
-                <h4 class="text-sm font-semibold text-[color:var(--accent)] uppercase mb-1">Operating System</h4>
-                <p class="text-[color:var(--color-text-primary)]">Ubuntu 22.04</p>
-                <p class="text-sm text-[color:var(--color-text-muted)]">Includes Lambda Stack for managing TensorFlow, PyTorch, CUDA, cuDNN, etc.</p>
-              </div>
-
-              <div>
-                <h4 class="text-sm font-semibold text-[color:var(--accent)] uppercase mb-1">Processor</h4>
-                <p class="text-[color:var(--color-text-primary)]">AMD Ryzen Threadripper PRO 7995WX</p>
-                <ul class="text-sm text-[color:var(--color-text-muted)] list-disc list-inside mt-1">
-                  <li>96 cores</li>
-                  <li>2.50 ~ 5.10 GHz</li>
-                  <li>384 MB cache</li>
-                  <li>PCIe 5.0 support</li>
-                </ul>
-              </div>
-            </div>
-
-            <!-- Right Column -->
-            <div class="space-y-4">
-              <div>
-                <h4 class="text-sm font-semibold text-[color:var(--accent)] uppercase mb-1">GPU</h4>
-                <p class="text-[color:var(--color-text-primary)]">3 × NVIDIA A800 40 GB EDU</p>
-                <p class="text-sm text-[color:var(--color-text-muted)]">Model: VCNA800-EDU</p>
-              </div>
-
-              <div>
-                <h4 class="text-sm font-semibold text-[color:var(--accent)] uppercase mb-1">Memory</h4>
-                <p class="text-[color:var(--color-text-primary)]">512 GB RAM</p>
-                <p class="text-sm text-[color:var(--color-text-muted)]">8 × Hynix DDR5-4800 RDIMM (64GB each)</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Key Features -->
-          <div class="mt-8 pt-6 border-t border-[color:var(--color-border-light)]">
-            <h4 class="text-lg font-semibold text-foreground mb-4">Ideal For:</h4>
-            <div class="grid md:grid-cols-3 gap-4">
-              <div class="flex items-start gap-2">
-                <span class="text-[color:var(--accent)] mt-1">🧬</span>
-                <div>
-                  <p class="font-semibold text-[color:var(--color-text-primary)]">Bioinformatics</p>
-                  <p class="text-sm text-[color:var(--color-text-muted)]">Genomics & transcriptomics analysis</p>
-                </div>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="text-[color:var(--accent)] mt-1">🤖</span>
-                <div>
-                  <p class="font-semibold text-[color:var(--color-text-primary)]">AI & Deep Learning</p>
-                  <p class="text-sm text-[color:var(--color-text-muted)]">Model training & inference</p>
-                </div>
-              </div>
-              <div class="flex items-start gap-2">
-                <span class="text-[color:var(--accent)] mt-1">📊</span>
-                <div>
-                  <p class="font-semibold text-[color:var(--color-text-primary)]">Data Science</p>
-                  <p class="text-sm text-[color:var(--color-text-muted)]">Large-scale data processing</p>
-                </div>
-              </div>
-            </div>
-          </div>
+        <!-- Specifications Card - Content from CMS -->
+        <div class="card-surface p-8 rounded-xl max-w-4xl mx-auto prose prose-lg max-w-none">
+          <Content />
         </div>
       </div>
     </main>

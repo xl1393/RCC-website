@@ -1,28 +1,32 @@
 ---
-
 import Header from '../../components/sections/Header.astro';
 import Footer from '../../components/sections/Footer.astro';
 import SkillSidebar from '../../components/sections/SkillSidebar.astro';
 import { skills } from '../../data/skills';
-import type { Skill } from '../../data/skills';
 import BaseHead from '../../components/BaseHead.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { getCollection, render } from 'astro:content';
 
-export const getStaticPaths = () => skills.map((skill) => ({ params: { slug: skill.slug } }));
+export async function getStaticPaths() {
+  const skillsContent = await getCollection('pages', (entry) => {
+    return entry.id.startsWith('skills/');
+  });
 
-const { slug } = Astro.params;
-const skill: Skill | undefined = skills.find((s) => s.slug === slug);
-if (!skill) {
-  throw new Error(`Skill not found: ${slug}`);
+  return skillsContent.map((skillContent) => ({
+    params: { slug: skillContent.data.slug },
+    props: { skillContent },
+  }));
 }
+
+const { skillContent } = Astro.props;
+const { Content } = await render(skillContent);
+const { title, icon, slug } = skillContent.data;
 ---
-
-
 
 <!doctype html>
 <html lang="en" data-theme="light">
   <head>
-    <BaseHead title={`${skill.title} | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+    <BaseHead title={`${title} | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
   </head>
   <body>
     <Header />
@@ -33,164 +37,13 @@ if (!skill) {
         </div>
         <section class="flex-1">
           <div class="max-w-3xl">
-          <div class="mb-6 flex flex-col items-center">
-            <div class="mb-4 rounded-xl size-[64px] flex items-center justify-center text-[var(--accent)] opacity-90 transition-all duration-300 will-change-transform [&>svg]:w-10 [&>svg]:h-10" style="background: rgba(var(--accent-rgb),0.08);" set:html={skill.icon} />
-            <h1 class="text-3xl md:text-4xl font-bold text-center mb-2 text-foreground">{skill.title}</h1>
-          </div>
-          {skill.slug === 'research-technology-marketplace' ? (
-            <div class="text-lg text-[color:var(--color-text-muted)] leading-relaxed text-left space-y-4">
-              <p>
-                <span aria-label="shopping cart" role="img">🛒</span><strong>Research Technology Marketplace</strong> <br/>
-                The Research Technology Marketplace is your gateway to the latest research technologies, computational tools, and shared resources across the CUNY system. Our goal is to empower researchers at every level—students, postdocs, and faculty—to accelerate discovery and innovation by providing easy access to advanced equipment and expertise.
-              </p>
-              <p>
-                Whether you are launching a new project, scaling up your experiments, or seeking specialized instrumentation, the Marketplace connects you to a robust network of resources. We facilitate collaboration and resource sharing, helping you maximize the impact of your research while minimizing barriers to access.
-              </p>
-              <ul class="list-none space-y-2">
-                <li><span aria-label="computer" role="img">🖥️</span> <strong>Available Major Equipment:</strong> Gain access to high-performance computing clusters for data-intensive research, next-generation sequencing machines for genomics, and a wide array of specialized research equipment to support your scientific goals.</li>
-                <li><span aria-label="office building" role="img">🏢</span> <strong>Accessible Core Facilities:</strong> Take advantage of shared core facilities, including imaging centers, analytical labs, and fabrication spaces, all available to CUNY researchers through a streamlined booking process.</li>
-                <li><span aria-label="arrows" role="img">🔄</span> <strong>Equipment Exchange:</strong> Our platform enables the sharing and exchange of research equipment across CUNY institutions, reducing duplication and ensuring that valuable resources are fully utilized. List your available equipment or find what you need for your next project.</li>
-              </ul>
+            <div class="mb-6 flex flex-col items-center">
+              <div class="mb-4 rounded-xl size-[64px] flex items-center justify-center text-[var(--accent)] opacity-90 transition-all duration-300 will-change-transform [&>svg]:w-10 [&>svg]:h-10" style="background: rgba(var(--accent-rgb),0.08);" set:html={icon} />
+              <h1 class="text-3xl md:text-4xl font-bold text-center mb-2 text-foreground">{title}</h1>
             </div>
-          ) : skill.slug === 'the-principles-and-practice-workshops' ? (
-            <div class="text-lg text-[color:var(--color-text-muted)] leading-relaxed text-left space-y-4">
-              <p>
-                <span aria-label="graduation cap" role="img">🎓</span> <strong>The Principles and Practice Workshops</strong><br/>
-                Elevate your research skills with our Principles and Practice Workshops—a series of interactive sessions designed to turn theory into action. These workshops are crafted for scientists, students, and professionals who want to master essential research methodologies and practical techniques across a range of disciplines.
-              </p>
-              <ul class="list-none space-y-2">
-                <li><span aria-label="hammer and wrench" role="img">�️</span> <strong>Hands-On Learning:</strong> Each workshop emphasizes experiential learning, with real-world scenarios, live demonstrations, and guided exercises that help you build confidence and competence.</li>
-                <li><span aria-label="books" role="img">�</span> <strong>Core Research Principles:</strong> Explore the foundational concepts that underpin rigorous scientific inquiry, including hypothesis development, experimental controls, and ethical research practices.</li>
-                <li><span aria-label="rocket" role="img">🚀</span> <strong>Practical Applications:</strong> Move beyond the textbook with sessions focused on data analysis, troubleshooting, and the use of modern research tools and technologies.</li>
-                <li><span aria-label="handshake" role="img">🤝</span> <strong>Collaborative Environment:</strong> Engage with peers and experts in a supportive setting that encourages discussion, problem-solving, and networking.</li>
-              </ul>
-              <p>
-                <span aria-label="star" role="img">⭐</span> <strong>Who Should Attend?</strong><br/>
-                - Early-career researchers seeking a strong foundation<br/>
-                - Experienced scientists looking to refresh or expand their skills<br/>
-                - Anyone interested in best practices for research excellence
-              </p>
-              <p>
-                Join us to gain practical insights, sharpen your research acumen, and become part of a vibrant learning community dedicated to advancing scientific discovery.
-              </p>
+            <div class="text-lg text-[color:var(--color-text-muted)] leading-relaxed text-left space-y-4 prose prose-lg max-w-none">
+              <Content />
             </div>
-          ) : skill.slug === 'research-strategy-and-experimental-design' ? (
-            <div class="text-lg text-[color:var(--color-text-muted)] leading-relaxed text-left space-y-4">
-              <p>
-                <span aria-label="clipboard" role="img">📋</span> <strong>Research Strategy and Experimental Design</strong><br/>
-                Our Research Strategy and Experimental Design service provides expert guidance to help you plan, structure, and execute robust research projects. We work with you from the earliest stages—formulating research questions and hypotheses—through to the design of experiments and protocols that maximize rigor, reproducibility, and impact.
-              </p>
-              <ul class="list-none space-y-2">
-                <li><span aria-label="bulb" role="img">💡</span> <strong>Strategic Planning:</strong> Collaborate with experienced researchers to develop clear, actionable research strategies tailored to your scientific goals and resources.</li>
-                <li><span aria-label="microscope" role="img">🔬</span> <strong>Experimental Design:</strong> Receive support in designing experiments that are statistically sound, ethically responsible, and optimized for meaningful results. Learn best practices for controls, randomization, and blinding.</li>
-                <li><span aria-label="bar chart" role="img">📊</span> <strong>Data Collection & Analysis:</strong> Get advice on selecting appropriate data collection methods, sample sizes, and analytical approaches to ensure your findings are robust and reproducible.</li>
-                <li><span aria-label="repeat" role="img">🔁</span> <strong>Reproducibility & Reporting:</strong> Implement protocols and documentation standards that support transparency and reproducibility, making your research more credible and impactful.</li>
-              </ul>
-              <p>
-                <span aria-label="sparkles" role="img">✨</span> <strong>Why Work With Us?</strong><br/>
-                - Personalized, one-on-one consultations with research experts<br/>
-                - Guidance on grant writing and project management<br/>
-                - Support for interdisciplinary and collaborative projects<br/>
-                - Emphasis on ethical, transparent, and impactful science
-              </p>
-              <p>
-                Let us help you turn your research ideas into successful, well-designed studies that stand up to peer review and drive scientific progress.
-              </p>
-            </div>
-          ) : skill.slug === 'bioinformatics-and-analytics-support' ? (
-            <div class="text-lg text-[color:var(--color-text-muted)] leading-relaxed text-left space-y-4">
-              <p>
-                <span aria-label="bar chart" role="img">📊</span> <strong>Bioinformatics and Analytics Support</strong><br/>
-                Unlock the full potential of your research data with our Bioinformatics and Analytics Support service. We provide expert assistance in managing, analyzing, and interpreting complex biological datasets, empowering you to make data-driven discoveries and accelerate your scientific progress.
-              </p>
-              <ul class="list-none space-y-2">
-                <li><span aria-label="dna" role="img">🧬</span> <strong>Genomics & Transcriptomics:</strong> Comprehensive support for next-generation sequencing (NGS) data, including quality control, alignment, variant calling, and expression analysis.</li>
-                <li><span aria-label="bar chart" role="img">📈</span> <strong>Statistical Analysis:</strong> Guidance on experimental design, statistical modeling, and hypothesis testing to ensure robust and reproducible results.</li>
-                <li><span aria-label="laptop" role="img">💻</span> <strong>Custom Pipelines & Automation:</strong> Development and optimization of bioinformatics workflows tailored to your research needs, from raw data processing to advanced analytics.</li>
-                <li><span aria-label="chart" role="img">📉</span> <strong>Data Visualization:</strong> Transform complex results into clear, publication-ready figures and interactive dashboards for effective communication and insight.</li>
-              </ul>
-              <p>
-                <span aria-label="bulb" role="img">💡</span> <strong>Why Choose Our Support?</strong><br/>
-                - Access to experienced bioinformaticians and data scientists<br/>
-                - Support for a wide range of omics and biomedical data types<br/>
-                - Flexible, collaborative approach tailored to your project goals<br/>
-                - Training and consultation available for all skill levels
-              </p>
-              <p>
-                Partner with us to turn your data into discoveries and drive your research forward with confidence.
-              </p>
-            </div>
-          ) : skill.slug === 'artificial-intelligence-for-research-and-health' ? (
-            <div class="text-lg text-[color:var(--color-text-muted)] leading-relaxed text-left space-y-4">
-              <p>
-                <span aria-label="robot" role="img">🤖</span> <strong>Artificial Intelligence for Research and Health</strong><br/>
-                Harness the transformative power of artificial intelligence and machine learning to advance biomedical research and healthcare innovation. Our AI for Research and Health service provides expertise, tools, and collaborative support to help you integrate cutting-edge computational approaches into your scientific and clinical projects.
-              </p>
-              <ul class="list-none space-y-2">
-                <li><span aria-label="brain" role="img">🧠</span> <strong>AI-Driven Discovery:</strong> Apply machine learning and deep learning to analyze complex datasets, uncover hidden patterns, and accelerate scientific breakthroughs.</li>
-                <li><span aria-label="microscope" role="img">🔬</span> <strong>Biomedical Applications:</strong> Develop predictive models for disease risk, drug response, and patient outcomes using real-world clinical and omics data.</li>
-                <li><span aria-label="gear" role="img">⚙️</span> <strong>Custom Solutions:</strong> Collaborate on the design and implementation of AI pipelines tailored to your research questions, from data preprocessing to model deployment.</li>
-                <li><span aria-label="chart" role="img">📊</span> <strong>Interpretation & Visualization:</strong> Translate complex AI results into actionable insights with clear visualizations and domain-specific interpretation.</li>
-              </ul>
-              <p>
-                <span aria-label="rocket" role="img">🚀</span> <strong>Why Work With Us?</strong><br/>
-                - Access to experienced AI researchers and data scientists<br/>
-                - Support for both experimental and clinical research projects<br/>
-                - Emphasis on ethical, transparent, and explainable AI<br/>
-                - Training and consultation for all experience levels
-              </p>
-              <p>
-                Let us help you unlock new possibilities in research and healthcare with the latest in artificial intelligence.
-              </p>
-            </div>
-          ) : skill.slug === 'community-participation-in-research-and-clinical-trials' ? (
-            <div class="text-lg text-[color:var(--color-text-muted)] leading-relaxed text-left space-y-4">
-              <p>
-                <span aria-label="people holding hands" role="img">🫱‍🫲</span> <strong>Community Participation in Research and Clinical Trials</strong><br/>
-                Empowering communities to take an active role in research and clinical trials is at the heart of our mission. We foster meaningful partnerships between researchers and community members to ensure that studies are inclusive, ethical, and impactful.
-              </p>
-              <ul class="list-none space-y-2">
-                <li><span aria-label="megaphone" role="img">📣</span> <strong>Outreach & Engagement:</strong> Build trust and awareness through culturally sensitive outreach, education, and transparent communication about research opportunities.</li>
-                <li><span aria-label="handshake" role="img">🤝</span> <strong>Participant Support:</strong> Provide guidance and resources to help community members navigate the clinical trial process, from informed consent to follow-up care.</li>
-                <li><span aria-label="globe" role="img">🌍</span> <strong>Diversity & Inclusion:</strong> Promote equitable participation by addressing barriers and ensuring that research reflects the needs and perspectives of diverse populations.</li>
-                <li><span aria-label="light bulb" role="img">💡</span> <strong>Feedback & Collaboration:</strong> Encourage ongoing dialogue and feedback to improve study design, recruitment, and outcomes for all stakeholders.</li>
-              </ul>
-              <p>
-                <span aria-label="star" role="img">⭐</span> <strong>Why Get Involved?</strong><br/>
-                - Contribute to research that benefits your community<br/>
-                - Access to new treatments and health information<br/>
-                - Opportunities for education and empowerment<br/>
-                - Help shape the future of healthcare and science
-              </p>
-              <p>
-                Join us in building a research environment where every voice matters and every participant is valued.
-              </p>
-            </div>
-          ) : skill.slug === 'center-membership-benefits-responsibilities-and-process' ? (
-            <div class="text-lg text-[color:var(--color-text-muted)] leading-relaxed text-left space-y-4">
-              <p>
-                <span aria-label="medal" role="img">🏅</span> <strong>Center Membership – Benefits, Responsibilities, and Process</strong><br/>
-                Become a member of our Center and join a vibrant network of researchers, clinicians, and community partners dedicated to advancing science and health. Membership offers unique opportunities for collaboration, professional growth, and access to valuable resources.
-              </p>
-              <ul class="list-none space-y-2">
-                <li><span aria-label="gift" role="img">🎁</span> <strong>Member Benefits:</strong> Enjoy access to shared facilities, funding opportunities, training programs, and exclusive events designed to support your research and career development.</li>
-                <li><span aria-label="handshake" role="img">🤝</span> <strong>Collaborative Community:</strong> Connect with peers and mentors across disciplines, fostering interdisciplinary projects and knowledge exchange.</li>
-                <li><span aria-label="clipboard" role="img">📋</span> <strong>Responsibilities:</strong> Contribute to the Center’s mission by participating in meetings, sharing expertise, and upholding standards of scientific integrity and collegiality.</li>
-                <li><span aria-label="check mark" role="img">✅</span> <strong>Membership Process:</strong> Learn about eligibility, application steps, and how to make the most of your membership from day one.</li>
-              </ul>
-              <p>
-                <span aria-label="rocket" role="img">🚀</span> <strong>Ready to Join?</strong><br/>
-                - Review our membership criteria and application process<br/>
-                - Reach out for a consultation or to ask questions<br/>
-                - Start connecting with a dynamic, supportive community
-              </p>
-              <p>
-                Take the next step in your research journey—become a Center member and help drive innovation and impact.
-              </p>
-            </div>
-          ) : (
-            <p class="text-lg text-[color:var(--color-text-muted)] leading-relaxed text-center">{skill.description}</p>
-          )}
           </div>
         </section>
       </div>
