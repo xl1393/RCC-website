@@ -16,6 +16,17 @@ collections:
   - name: "pages"
     label: "Pages"
     files:
+      - label: "Home Page"
+        name: "home"
+        file: "src/content/pages/home.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "text" }
+          - { label: "Primary CTA Text", name: "primaryCTA", widget: "string" }
+          - { label: "Primary CTA Link", name: "primaryCTALink", widget: "string" }
+          - { label: "Secondary CTA Text", name: "secondaryCTA", widget: "string" }
+          - { label: "Secondary CTA Link", name: "secondaryCTALink", widget: "string" }
+
       - label: "About Us"
         name: "about"
         file: "src/content/pages/about.md"
@@ -23,3 +34,43 @@ collections:
           - { label: "Title", name: "title", widget: "string" }
           - { label: "Description", name: "description", widget: "string" }
           - { label: "Body", name: "body", widget: "markdown" }
+
+      - label: "Resources"
+        name: "resources"
+        file: "src/content/pages/resources.md"
+        fields:
+          - { label: "Page Title", name: "title", widget: "string" }
+          - { label: "Description", name: "description", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "string" }
+          - { label: "Section Title", name: "sectionTitle", widget: "string" }
+          - { label: "Section Description", name: "sectionDescription", widget: "string" }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "skills"
+    label: "Skills Pages"
+    folder: "src/content/pages/skills"
+    create: false
+    delete: false
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Icon SVG", name: "icon", widget: "text" }
+      - { label: "Content", name: "body", widget: "markdown" }
+
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/content/blog"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "string" }
+      - { label: "Publish Date", name: "pubDate", widget: "datetime" }
+      - { label: "Updated Date", name: "updatedDate", widget: "datetime", required: false }
+      - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Category", name: "category", widget: "string", required: false }
+      - { label: "Author", name: "author", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }

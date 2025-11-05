@@ -25,7 +25,16 @@ const pages = defineCollection({
 	// Type-check frontmatter using a schema
 	schema: z.object({
 		title: z.string(),
-		description: z.string(),
+		description: z.string().optional(),
+		subtitle: z.string().optional(),
+		slug: z.string().optional(),
+		icon: z.string().optional(),
+		primaryCTA: z.string().optional(),
+		primaryCTALink: z.string().optional(),
+		secondaryCTA: z.string().optional(),
+		secondaryCTALink: z.string().optional(),
+		sectionTitle: z.string().optional(),
+		sectionDescription: z.string().optional(),
 	}),
 });
 
