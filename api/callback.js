@@ -30,6 +30,23 @@ export default async function handler(req, res) {
     }
 
     // Send success message with token to close popup
+    const script = `
+      <script>
+        (function() {
+          function receiveMessage(e) {
+            console.log("receiveMessage", e);
+            window.opener.postMessage(
+              'authorization:github:success:' + JSON.stringify(${JSON.stringify(data)}),
+              e.origin
+            );
+            window.removeEventListener("message", receiveMessage, false);
+          }
+          window.addEventListener("message", receiveMessage, false);
+          window.opener.postMessage("authorizing:github", "*");
+        })();
+      </script>
+    `;
+
     const html = `
       <!DOCTYPE html>
       <html>
@@ -37,27 +54,14 @@ export default async function handler(req, res) {
           <title>Authorization Success</title>
         </head>
         <body>
-          <script>
-            (function() {
-              function receiveMessage(e) {
-                console.log("receiveMessage %o", e);
-                window.opener.postMessage(
-                  'authorization:github:success:${JSON.stringify(data)}',
-                  e.origin
-                );
-                window.removeEventListener("message", receiveMessage, false);
-              }
-              window.addEventListener("message", receiveMessage, false);
-              window.opener.postMessage("authorizing:github", "*");
-            })();
-          </script>
+          ${script}
           <p>Authorization successful! You can close this window.</p>
         </body>
       </html>
     `;
 
     res.setHeader('Content-Type', 'text/html');
-    res.send(html);
+    res.status(200).send(html);
   } catch (error) {
     console.error('OAuth error:', error);
     res.status(500).send('Authentication failed');
