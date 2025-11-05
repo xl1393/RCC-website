@@ -9,7 +9,7 @@ import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const skillsContent = await getCollection('pages', (entry) => {
-    return entry.id.startsWith('skills/');
+    return entry.data.icon !== undefined;
   });
 
   return skillsContent.map((skillContent) => ({
