@@ -2,8 +2,8 @@ backend:
   name: github
   repo: xl1393/RCC-website
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
+  base_url: https://rcc-website-five.vercel.app
+  auth_endpoint: api/auth
 
 # For local development/testing only (no authentication, no file access)
 # backend:
