@@ -8,4 +8,4 @@ tags:
   - demo
 category: Design
 ---
-Short sample content. Replace with your own. RUning some test
+Short sample content. Replace with your own.
