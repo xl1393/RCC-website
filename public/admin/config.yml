@@ -35,17 +35,6 @@ collections:
           - { label: "Description", name: "description", widget: "string" }
           - { label: "Body", name: "body", widget: "markdown" }
 
-      - label: "Resources"
-        name: "resources"
-        file: "src/content/pages/resources.md"
-        fields:
-          - { label: "Page Title", name: "title", widget: "string" }
-          - { label: "Description", name: "description", widget: "string" }
-          - { label: "Subtitle", name: "subtitle", widget: "string" }
-          - { label: "Section Title", name: "sectionTitle", widget: "string" }
-          - { label: "Section Description", name: "sectionDescription", widget: "string" }
-          - { label: "Body", name: "body", widget: "markdown" }
-
   - name: "skills"
     label: "Skills Pages"
     folder: "src/content/pages/skills"
