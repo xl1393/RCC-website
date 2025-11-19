@@ -1,0 +1,31 @@
+---
+const title = "Equipment and Machines";
+const description = "Browse our comprehensive catalog of research equipment and machines available across CUNY facilities.";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      iframe {
+        width: 100%;
+        height: 100vh;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe src="/equipment_table_source.html" title="Equipment List"></iframe>
+  </body>
+</html>
