@@ -1,7 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /secret
 
-# Disallow dev/preview endpoints (none by default)
+# Disallow dev/preview endpoints and hidden pages
 
 Sitemap: https://example.com/sitemap-index.xml
 
